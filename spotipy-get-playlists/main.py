@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, redirect, session, url_for, request, url
+from flask import Flask, redirect, session, url_for, request
 
 from spotipy import Spotify
 from spotipy.oauth2 import SpotifyOAuth
@@ -45,7 +45,7 @@ def get_playlists():
         return redirect(auth_url)
 
     playlists = sp.current_user_playlists()
-    playlists_info =[(pl['name'], pl['external_urls']['spotify']) for pl in playlists['item']]
+    playlists_info =[(pl['name'], pl['external_urls']['spotify']) for pl in playlists['items']]
     playlists_html = '<br>'.join([f'{name}: {url}' for name, url in playlists_info])
     
     return playlists_html
